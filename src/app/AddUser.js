@@ -10,30 +10,37 @@ export class AddUser extends React.Component{
         }
         this.addUser = this.addUser.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.dateTypes = {
+            registration: "registration",
+            lastActivity: "lastActivity"
+        }
     }
 
-    handleChange = (event) => {
-        console.log(event.target.newRegistrationDt);
-        this.setState({
-            newRegistrationDt: event.target.newRegistrationDt, 
-            newLastActivityDt: event.target.newLastActivityDt
-        });
+    handleChange = (event, dateType) => {
+        let { value } = event.target 
+        if (dateType === this.dateTypes.registration) this.setState({ newRegistrationDt: value });
+        else this.setState({ newLastActivityDt: value });
     }
 
     addUser() {
-        // Simple POST request with a JSON body using fetch
+        let { newRegistrationDt, newLastActivityDt } = this.state;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
                 { 
-                    registrationDt: this.state.newRegistrationDt, 
-                    lastActivityDt: this.state.newLastActivityDt  
-                })
+                    registrationDt: newRegistrationDt, 
+                    lastActivityDt: newLastActivityDt  
+                }
+            )
         };
+
         fetch('https://localhost:44302/api/user/save', requestOptions)
             .then(response => response.json())
-            .then(data => this.setState({ postId: data.id }));
+            .then(this.setState({
+                newLastActivityDt: "",
+                newRegistrationDt: ""
+            }));
     }
 
     render(){
@@ -44,15 +51,21 @@ export class AddUser extends React.Component{
                     <tbody>
                         <tr>
                             <td>
-                                <input type="date" 
+                                <label htmlFor="newRegistrationDt">Registration Date: </label>
+                                <input
+                                    id="newRegistrationDt"
+                                    type="date"
                                     value={newRegistrationDt} 
-                                    onChange={(event) => this.handleChange(event)} >
+                                    onChange={(event) => this.handleChange(event, this.dateTypes.registration)} >
                                 </input>
                             </td>
                             <td>
-                                <input type="date"  
+                                <label htmlFor="newLastActivityDt">Last Activity Date: </label>
+                                <input
+                                    id="newLastActivityDt"
+                                    type="date"
                                     value={newLastActivityDt} 
-                                    onChange={(event) => this.handleChange(event)} >
+                                    onChange={(event) => this.handleChange(event, this.dateTypes.lastActivity)} >
                                 </input>
                             </td>
                             <td><button onClick={this.addUser}>add user</button></td>

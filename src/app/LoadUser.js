@@ -6,21 +6,20 @@ export class LoadUser extends React.Component{
         this.state = {
             isLoaded: false,
             items:[],
-            newRegistrationDt: props.newRegistrationDt,
-            lastActivityDt: props.lastActivityDt
+            newRegistrationDt: '',
+            lastActivityDt: ''
         }
         this.getUsers = this.getUsers.bind(this);
     }
 
-    getUsers() {
-        return (fetch('https://localhost:44302/api/user/getall')
-        .then(res => res.json())
-        .then(json => {
-            this.setState({
-                isLoaded: true,
-                items: json
-            })
-        }));
+    async getUsers() {
+        
+        const res = await fetch('https://localhost:44302/api/user/getall');
+        const json = await res.json();
+        this.setState({
+            isLoaded: true,
+            items: json
+        });
     }
 
     render(){

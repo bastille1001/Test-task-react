@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { LoadUser } from './app/LoadUser';
 import { AddUser } from './app/AddUser';
-import moment from 'moment';
+import { Calculate } from './app/Calculate';
 
 class TestTaskApp extends React.Component{
     constructor(props){
@@ -10,8 +10,8 @@ class TestTaskApp extends React.Component{
         this.state = {
             items: [],
             isLoaded: false,
-            newRegistrationDt: moment().format("YYYY-MM-DD"),
-            newLastActivityDt: moment().format("YYYY-MM-DD")
+            newRegistrationDt: "",
+            newLastActivityDt: ""
         }
     }
 
@@ -19,11 +19,11 @@ class TestTaskApp extends React.Component{
         return (
             
             <div>
-                <LoadUser items = {this.state.items}/>
-                <AddUser 
-                    newRegistrationDt={this.state.newRegistrationDt}
-                    newLastActivityDt={this.state.newLastActivityDt}
-                />
+                <LoadUser />
+                <AddUser  
+                    newRegistrationDt ={this.state.newRegistrationDt}
+                    newLastActivityDt ={this.state.newLastActivityDt}/>
+                <Calculate />
             </div>
             
         );
