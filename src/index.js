@@ -1,17 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { LoadUser } from './app/LoadUser';
+import { AddUser } from './app/AddUser';
+import moment from 'moment';
+
+class TestTaskApp extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            items: [],
+            isLoaded: false,
+            newRegistrationDt: moment().format("YYYY-MM-DD"),
+            newLastActivityDt: moment().format("YYYY-MM-DD")
+        }
+    }
+
+    render(){
+        return (
+            
+            <div>
+                <LoadUser items = {this.state.items}/>
+                <AddUser 
+                    newRegistrationDt={this.state.newRegistrationDt}
+                    newLastActivityDt={this.state.newLastActivityDt}
+                />
+            </div>
+            
+        );
+    }
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <TestTaskApp />,
+    document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
