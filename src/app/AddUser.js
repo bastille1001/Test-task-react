@@ -1,28 +1,25 @@
 import React from 'react';
 import moment from 'moment';
 
-export class AddUser extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            newRegistrationDt: moment().format("DD-MMM-YYYY"),
-            newLastActivityDt: moment().format("DD-MMM-YYYY")
-        }
-        this.addUser = this.addUser.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.dateTypes = {
-            registration: "registration",
-            lastActivity: "lastActivity"
-        }
-    }
 
+export class AddUser extends React.Component{
+    
+    state={
+        newRegistrationDt: moment().format("DD-MMM-YYYY"),
+        newLastActivityDt: moment().format("DD-MMM-YYYY"),
+    }
+    dateTypes = {
+        registration: "registration",
+        lastActivity: "lastActivity"
+    }       
+    
     handleChange = (event, dateType) => {
         let { value } = event.target 
         if (dateType === this.dateTypes.registration) this.setState({ newRegistrationDt: value });
         else this.setState({ newLastActivityDt: value });
     }
 
-    addUser() {
+    addUser = async () => {
         let { newRegistrationDt, newLastActivityDt } = this.state;
         const requestOptions = {
             method: 'POST',
@@ -35,7 +32,7 @@ export class AddUser extends React.Component{
             )
         };
 
-        fetch('https://localhost:44302/api/user/save', requestOptions)
+        await fetch('https://localhost:44302/api/user', requestOptions)
             .then(response => response.json())
             .then(this.setState({
                 newLastActivityDt: "",
@@ -68,7 +65,17 @@ export class AddUser extends React.Component{
                                     onChange={(event) => this.handleChange(event, this.dateTypes.lastActivity)} >
                                 </input>
                             </td>
-                            <td><button onClick={this.addUser}>add user</button></td>
+                            <td>
+                                <button 
+                                    disabled=
+                                    {
+                                        Date.parse(newRegistrationDt) > Date.parse(newLastActivityDt) 
+                                        || (moment(newRegistrationDt, "DD-MMM-YYYY",true).isValid() 
+                                        || moment(newLastActivityDt,"DD-MMM-YYYY",true).isValid())
+                                    }
+                                    onClick={this.addUser}> add user
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

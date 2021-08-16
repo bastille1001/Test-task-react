@@ -5,29 +5,16 @@ export class LoadUser extends React.Component{
         super(props);
         this.state = {
             isLoaded: false,
-            items:[],
-            newRegistrationDt: '',
-            lastActivityDt: ''
+            items: props.items,
         }
-        this.getUsers = this.getUsers.bind(this);
-    }
-
-    async getUsers() {
-        
-        const res = await fetch('https://localhost:44302/api/user/getall');
-        const json = await res.json();
-        this.setState({
-            isLoaded: true,
-            items: json
-        });
     }
 
     render(){
-        
+        const {getUsers,items} = this.props;
         return(
             <div>
                 <div>
-                    <button onClick={this.getUsers}>
+                    <button onClick={getUsers}>
                         Load users
                     </button>
                 </div>
@@ -41,7 +28,7 @@ export class LoadUser extends React.Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.items?.map(item => (
+                            {items?.map(item => (
                                     <tr key={item.userId}>
                                         <td>{item.userId}</td>
                                         <td>{new Date(item.registrationDt).toLocaleDateString()}</td>
