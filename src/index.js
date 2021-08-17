@@ -9,17 +9,6 @@ class TestTaskApp extends React.Component{
     state={
         isLoaded: false,
         items:[],
-        xDay: 7,
-        percentage: 0,
-    }
-
-    
-    calculate = async () => {
-        const res = await fetch(`https://localhost:44302/api/user/calculate?xDay=${this.state.xDay}`);
-        const json = await res.json();
-        this.setState({
-            percentage: json
-        });
     }
     
 
@@ -36,14 +25,13 @@ class TestTaskApp extends React.Component{
     render(){
         return (
             <div>
-                <LoadUser items={this.state.items}/>
+                <LoadUser 
+                    items={this.state.items}
+                />
 
                 <AddUser />
                 
-                <Calculate 
-                    calculate={this.calculate} 
-                    percentage={this.state.percentage}  
-                    xDay={this.state.xDay} 
+                <Calculate
                     items={this.state.items}
                 />
             </div>
