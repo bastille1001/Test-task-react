@@ -4,20 +4,15 @@ export class LoadUser extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            isLoaded: false,
             items: props.items,
         }
     }
 
     render(){
-        const {getUsers,items} = this.props;
+        const {items} = this.props;
         return(
             <div>
-                <div>
-                    <button onClick={getUsers}>
-                        Load users
-                    </button>
-                </div>
+                <div>{console.log(items)}</div>
                 <div>
                     <table>
                         <thead>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LoadUser } from './app/LoadUser';
-import { AddUser } from './app/AddUser';
-import { Calculate } from './app/Calculate';
+import { LoadUser } from './components/LoadUser';
+import { AddUser } from './components/AddUser';
+import { Calculate } from './components/Calculate';
 
 class TestTaskApp extends React.Component{
     
@@ -13,17 +13,18 @@ class TestTaskApp extends React.Component{
         percentage: 0,
     }
 
+    
     calculate = async () => {
         const res = await fetch(`https://localhost:44302/api/user/calculate?xDay=${this.state.xDay}`);
         const json = await res.json();
         this.setState({
             percentage: json
-        });    
+        });
     }
+    
 
-    getUsers = async () => {
-        
-        const res = await fetch('https://localhost:44302/api/user/getall');
+    componentDidMount = async () => {
+        const res = await fetch("https://localhost:44302/api/user/getall");
         const json = await res.json();
         this.setState({
             isLoaded: true,
@@ -35,10 +36,7 @@ class TestTaskApp extends React.Component{
     render(){
         return (
             <div>
-                <LoadUser 
-                    getUsers={this.getUsers} 
-                    items={this.state.items} 
-                />
+                <LoadUser items={this.state.items}/>
 
                 <AddUser />
                 
