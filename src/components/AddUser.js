@@ -34,7 +34,8 @@ export class AddUser extends React.Component{
             )
         };
 
-        await fetch('https://localhost:44302/api/user/save', requestOptions)
+        try{
+            await fetch('https://localhost:44302/api/user/save', requestOptions)
             .then(response => {
                 
                 if (!response.ok){
@@ -45,11 +46,14 @@ export class AddUser extends React.Component{
                 newLastActivityDt: "",
                 newRegistrationDt: "",
                 error: null
-            })).catch(err => {
-                this.setState({
-                    error: err.message
-                })
+            }));
+        }
+        catch(error){
+            this.setState({
+                error: error.message
             });
+        }
+        
     }
 
     render() {

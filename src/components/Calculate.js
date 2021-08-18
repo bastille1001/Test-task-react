@@ -9,14 +9,14 @@ export class Calculate extends React.Component{
         this.state={
             rollingRetention: [],
             xDay: 7,
-            items: props.items,
+            items: this.props,
             isClicked: false,
             days: [1,2,3,4,5,6,7]
         }
     }
 
     rollingRetention = () => {
-        const {rollingRetention, days} = this.state;
+        const {rollingRetention, days} = this.props;
         if(this.state.isClicked){
             return <Line
             data={{
@@ -95,7 +95,6 @@ export class Calculate extends React.Component{
     }
 
     render(){
-        // const {calculate} = this.props;
         return(
             <div>
                 <div className="brLine"></div>
