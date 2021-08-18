@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import './styles/addUser.css';
 
 
 export class AddUser extends React.Component{
@@ -7,7 +8,7 @@ export class AddUser extends React.Component{
     state={
         newRegistrationDt: moment().format("DD-MMM-YYYY"),
         newLastActivityDt: moment().format("DD-MMM-YYYY"),
-        error: ''
+        error: '',
     }
     dateTypes = {
         registration: "registration",
@@ -35,6 +36,7 @@ export class AddUser extends React.Component{
 
         await fetch('https://localhost:44302/api/user/save', requestOptions)
             .then(response => {
+                
                 if (!response.ok){
                     throw Error("all fields required");
                 }
@@ -50,11 +52,11 @@ export class AddUser extends React.Component{
             });
     }
 
-    render(){
+    render() {
         let {newRegistrationDt, newLastActivityDt} = this.state;
         return(
-            <div>
-                <div>{this.state.error}</div>
+            <div className="mainDiv">
+                <div className="errorDiv">{this.state.error}</div>
                 <table>
                     <tbody>
                         <tr>
@@ -77,15 +79,7 @@ export class AddUser extends React.Component{
                                 </input>
                             </td>
                             <td>
-                                <button 
-                                    // disabled=
-                                    // {
-                                    //     // Date.parse(newRegistrationDt) > Date.parse(newLastActivityDt) || 
-                                    //     (moment(newRegistrationDt, "DD-MMM-YYYY",true).isValid() 
-                                    //     || moment(newLastActivityDt,"DD-MMM-YYYY",true).isValid())
-                                    // }
-                                    onClick={this.addUser}> add user
-                                </button>
+                                <button className="button" onClick={this.addUser}> Add user</button>
                             </td>
                         </tr>
                     </tbody>

@@ -1,0 +1,22 @@
+.mainDiv {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.mainDiv table {
+    margin: auto;
+}
+
+.mainDiv table input {
+    border-color: royalblue;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 8px;
+}
+
+.mainDiv table label {
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 8px;
+}

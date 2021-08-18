@@ -1,6 +1,7 @@
 import React from 'react';
-import { Bar, Line, Pie } from 'react-chartjs-2';
-import './index.css';
+import { Bar, Line } from 'react-chartjs-2';
+import './styles/calculate.css';
+
 
 export class Calculate extends React.Component{
     constructor(props){
@@ -97,9 +98,8 @@ export class Calculate extends React.Component{
         // const {calculate} = this.props;
         return(
             <div>
-                <div>{this.createBar()}</div>
-                <div>{this.rollingRetention()}</div>
-                <div>
+                <div className="brLine"></div>
+                <div className="calcBtnDiv">
                     <button className="button" onClick={() => {
                         this.calculate();
                         this.setState({isClicked: true})
@@ -108,19 +108,8 @@ export class Calculate extends React.Component{
                     </button>
                 </div>
                 
-                <div>
-
-                </div>
-
-
-
-                {/* <div>
-                    <input type="number" defaultValue={xDay} >
-                    </input>
-                </div>
-                <div>
-                    <h1>{percentage}</h1>
-                </div> */}
+                <div>{this.createBar()}</div>
+                <div>{this.rollingRetention()}</div>
             </div>
         );
     }

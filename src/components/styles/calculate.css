@@ -1,0 +1,12 @@
+.brLine {
+    background-color: #4A9DFF;
+    margin: auto;
+    height: 1px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.calcBtnDiv {
+    text-align: center;
+    margin-bottom: 25px;
+}

@@ -29,7 +29,9 @@ class TestTaskApp extends React.Component{
                     items={this.state.items}
                 />
 
-                <AddUser />
+                <AddUser 
+                    items={this.state.items}
+                />
                 
                 <Calculate
                     items={this.state.items}

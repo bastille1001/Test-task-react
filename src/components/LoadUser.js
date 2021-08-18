@@ -1,46 +1,22 @@
 import React from 'react';
 import './index.css';
+import './styles/loadUser.css';
+
 
 export class LoadUser extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            items: [{
-                userId: 1,
-                registrationDt: new Date(),
-                lastActivityDt: new Date()
-            },
-            {
-                userId: 2,
-                registrationDt: new Date(),
-                lastActivityDt: new Date()
-            },
-            {
-                userId: 3,
-                registrationDt: new Date(),
-                lastActivityDt: new Date()
-            },
-            {
-                userId: 4,
-                registrationDt: new Date(),
-                lastActivityDt: new Date()
-            },
-            {
-                userId: 5,
-                registrationDt: new Date(),
-                lastActivityDt: new Date()
-            }
-        ]
-            // items: props.items,
+            items: props.items,
         }
     }
 
     render(){
-        // const {items} = this.props;
+        const {items} = this.props;
         return(
-            <div >
+            <div className="wrapperDiv">
                 <div>
-                    <table className="table">
+                    <table id="customers">
                         <thead>
                             <tr>
                                 <th >User Id</th>
@@ -49,7 +25,7 @@ export class LoadUser extends React.Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.items?.map(item => (
+                            {items?.map(item => (
                                     <tr key={item.userId}>
                                         <td >{item.userId}</td>
                                         <td >{new Date(item.registrationDt).toLocaleDateString()}</td>
