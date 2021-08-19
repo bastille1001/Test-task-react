@@ -34,7 +34,7 @@ export class AddUser extends React.Component{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
-                { 
+                {
                     registrationDt: newRegistrationDt, 
                     lastActivityDt: newLastActivityDt  
                 }
@@ -78,7 +78,7 @@ export class AddUser extends React.Component{
                     <tbody>
                         <tr>
                             <td>
-                                <label htmlFor="newRegistrationDt">Registration Date: </label>
+                                <label htmlFor="newRegistrationDt">Registration date: </label>
                                 <input
                                     id="newRegistrationDt"
                                     type="date"
@@ -87,7 +87,7 @@ export class AddUser extends React.Component{
                                 </input>
                             </td>
                             <td>
-                                <label htmlFor="newLastActivityDt">Last Activity Date: </label>
+                                <label htmlFor="newLastActivityDt">Last activity date: </label>
                                 <input
                                     id="newLastActivityDt"
                                     type="date"
