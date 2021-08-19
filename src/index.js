@@ -13,7 +13,7 @@ class TestTaskApp extends React.Component{
     
 
     componentDidMount = async () => {
-        const res = await fetch("https://localhost:44302/api/user/getall");
+        const res = await fetch("http://testappapi.somee.com/TestAppApi/api/user");
         const json = await res.json();
         this.setState({
             isLoaded: true,

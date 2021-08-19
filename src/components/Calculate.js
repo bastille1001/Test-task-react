@@ -9,14 +9,16 @@ export class Calculate extends React.Component{
         this.state={
             rollingRetention: [],
             xDay: 7,
-            items: props.items,
+            items: this.props,
             isClicked: false,
             days: [1,2,3,4,5,6,7]
         }
     }
 
     rollingRetention = () => {
-        const {rollingRetention, days} = this.state;
+        const {rollingRetention} = this.state;
+        const {days} = this.state;
+        
         if(this.state.isClicked){
             return <Line
             data={{
@@ -51,13 +53,11 @@ export class Calculate extends React.Component{
     }
 
     calculate = async () => {
-        
-            const res = await fetch(`https://localhost:44302/api/user/calculate?xDay=${this.state.xDay}`);
+            const res = await fetch(`http://testappapi.somee.com/TestAppApi/api/user/calculate?xDay=${this.state.xDay}`);
             const json = await res.json();
             this.setState({
                 rollingRetention: json
             });
-        
     }
 
     createBar = () => {
@@ -95,7 +95,6 @@ export class Calculate extends React.Component{
     }
 
     render(){
-        // const {calculate} = this.props;
         return(
             <div>
                 <div className="brLine"></div>
@@ -107,7 +106,6 @@ export class Calculate extends React.Component{
                         Calculate
                     </button>
                 </div>
-                
                 <div>{this.createBar()}</div>
                 <div>{this.rollingRetention()}</div>
             </div>

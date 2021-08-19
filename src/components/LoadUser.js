@@ -9,14 +9,17 @@ export class LoadUser extends React.Component{
         this.state = {
             items: this.props,
             currentPage: 1,
-            itemsPerPage: 5
+            itemsPerPage: 3,
+            activePage: 1
         }
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(event) {
+        console.log("event.target.id", event.target.id)
         this.setState({
-          currentPage: Number(event.target.id)
+          currentPage: Number(event.target.id),
+          activePage: Number(event.target.id)
         });
       }
 
@@ -35,16 +38,16 @@ export class LoadUser extends React.Component{
 
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-                <nav className="pagination">
-                    <li
+                <div className="pagination">
+                     <p 
                         key={number}
                         id={number}
                         onClick={this.handleClick}
-                        className="pagination"
+                        className={this.state.activePage === number && "active"}
                         >
                         {number}
-                    </li>
-                </nav>
+                    </p>
+                </div>
                 
             );
         });
@@ -69,10 +72,10 @@ export class LoadUser extends React.Component{
                                     </tr>
                                 ))}
                         </tbody>
-                        {renderPageNumbers}
                     </table>
-                    
+                    {renderPageNumbers}
                 </div>
+                
             </div>
         );
     }
