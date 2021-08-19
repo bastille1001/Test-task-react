@@ -54,28 +54,27 @@ export class LoadUser extends React.Component{
 
         return(
             <div className="wrapperDiv">
-                <div>
-                    <table id="customers">
-                        <thead>
-                            <tr>
-                                <th >User id</th>
-                                <th >Registration date</th>
-                                <th >Last activity date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {currentItems.map((item,idx) => (
-                                    <tr key={idx}>
-                                        <td >{item.userId}</td>
-                                        <td >{new Date(item.registrationDt).toLocaleDateString()}</td>
-                                        <td >{new Date(item.lastActivityDt).toLocaleDateString()}</td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </table>
-                    {renderPageNumbers}
-                </div>
-                
+                <table id="customers">
+                    <thead>
+                        <tr>
+                            <th >User id</th>
+                            <th >Registration date</th>
+                            <th >Last activity date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentItems.map((item,idx) => (
+                                <tr key={idx}>
+                                    <td >{item.userId}</td>
+                                    <td >{new Date(item.registrationDt).toLocaleDateString()}</td>
+                                    <td >{new Date(item.lastActivityDt).toLocaleDateString()}</td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+                <div className="paginationDiv">
+                    {renderPageNumbers}  
+                </div>        
             </div>
         );
     }

@@ -13,7 +13,7 @@ class TestTaskApp extends React.Component{
     
 
     componentDidMount = async () => {
-        const res = await fetch("https://localhost:44302/api/user/getall");
+        const res = await fetch(`${process.env.REACT_APP_TASK_API}api/user`);
         const json = await res.json();
         this.setState({
             isLoaded: true,
@@ -28,11 +28,11 @@ class TestTaskApp extends React.Component{
                 <LoadUser 
                     items={this.state.items}
                 />
-
+                <br />
                 <AddUser 
                     items={this.state.items}
                 />
-                
+                <br />
                 <Calculate
                     items={this.state.items}
                 />

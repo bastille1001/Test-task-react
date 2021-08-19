@@ -4,12 +4,15 @@ import './styles/addUser.css';
 
 
 export class AddUser extends React.Component{
-    
-    state={
-        newRegistrationDt: moment().format("DD-MMM-YYYY"),
-        newLastActivityDt: moment().format("DD-MMM-YYYY"),
-        error: '',
+    constructor(props){
+        super(props);
+        this.state={
+            newRegistrationDt: moment().format("DD-MMM-YYYY"),
+            newLastActivityDt: moment().format("DD-MMM-YYYY"),
+            error: ''
+        }
     }
+    
     dateTypes = {
         registration: "registration",
         lastActivity: "lastActivity"
@@ -19,6 +22,10 @@ export class AddUser extends React.Component{
         let { value } = event.target 
         if (dateType === this.dateTypes.registration) this.setState({ newRegistrationDt: value });
         else this.setState({ newLastActivityDt: value });
+    }
+
+    componentDidMount() {
+        console.log("process.env.PUBLIC_URL", process.env);
     }
 
     addUser = async () => {
@@ -34,33 +41,39 @@ export class AddUser extends React.Component{
             )
         };
 
-        try{
-            await fetch('https://localhost:44302/api/user/save', requestOptions)
-            .then(response => {
-                
-                if (!response.ok){
-                    throw Error("all fields required");
-                }
-                response.json()})
-            .then(this.setState({
-                newLastActivityDt: "",
-                newRegistrationDt: "",
-                error: null
-            }));
-        }
-        catch(error){
-            this.setState({
-                error: error.message
-            });
-        }
-        
+        fetch(`${process.env.REACT_APP_TASK_API}api/save`, requestOptions)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    newLastActivityDt: "",
+                    newRegistrationDt: "",
+                    error: null,
+                    success: "Item successfully added!",
+                });
+
+                setTimeout(() => {
+                    this.setState({
+                        success: "",
+                    });
+                }, 2000)
+            })
+            .catch(e => {
+                this.setState({
+                    error: "All fields required!"
+                });
+                setTimeout(() => {
+                    this.setState({
+                        error: "",
+                    });
+                }, 2000)
+            })
     }
 
     render() {
         let {newRegistrationDt, newLastActivityDt} = this.state;
         return(
             <div className="mainDiv">
-                <div className="errorDiv">{this.state.error}</div>
                 <table>
                     <tbody>
                         <tr>
@@ -88,6 +101,8 @@ export class AddUser extends React.Component{
                         </tr>
                     </tbody>
                 </table>
+                <div className="errorDiv">{this.state.error}</div>
+                <div className="successDiv">{this.state.success}</div>
             </div>
         );
     }
