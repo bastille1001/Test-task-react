@@ -107,8 +107,10 @@ export class Calculate extends React.Component{
                         Calculate
                     </button>
                 </div>
-                <div>{this.createBar()}</div>
-                <div>{this.rollingRetention()}</div>
+                <div style={{width:'70%', marginLeft: '15%'}}>
+                    <div style={{marginBottom: '55px'}}>{this.createBar()}</div>
+                    <div>{this.rollingRetention()}</div>
+                </div>
             </div>
         );
     }

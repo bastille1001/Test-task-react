@@ -49,14 +49,16 @@ export class AddUser extends React.Component{
                     newLastActivityDt: "",
                     newRegistrationDt: "",
                     error: null,
-                    success: "Item successfully added!",
-                });
+                    success: "User successfully added!",
+                })
 
                 setTimeout(() => {
                     this.setState({
                         success: "",
                     });
                 }, 2000)
+
+                this.props.fetchAllList();
             })
             .catch(e => {
                 this.setState({
