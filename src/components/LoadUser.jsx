@@ -10,7 +10,8 @@ export class LoadUser extends React.Component{
             items: this.props,
             currentPage: 1,
             itemsPerPage: 3,
-            activePage: 1
+            activePage: 1,
+            isLoaded: this.props
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -53,28 +54,34 @@ export class LoadUser extends React.Component{
         });
 
         return(
-            <div className="wrapperDiv">
-                <table id="customers">
-                    <thead>
-                        <tr>
-                            <th >User id</th>
-                            <th >Registration date</th>
-                            <th >Last activity date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentItems.map((item,idx) => (
-                                <tr key={idx}>
-                                    <td >{item.userId}</td>
-                                    <td >{new Date(item.registrationDt).toLocaleDateString()}</td>
-                                    <td >{new Date(item.lastActivityDt).toLocaleDateString()}</td>
+            <div className="loading">
+                {this.props.isLoaded || !this.props.items ? (<div>loading...</div>)
+                    : (
+                    <div className="wrapperDiv">
+                        <table id="customers">
+                            <thead>
+                                <tr>
+                                    <th >User id</th>
+                                    <th >Registration date</th>
+                                    <th >Last activity date</th>
                                 </tr>
-                            ))}
-                    </tbody>
-                </table>
-                <div className="paginationDiv">
-                    {renderPageNumbers}  
-                </div>        
+                            </thead>
+                            <tbody>
+                                {currentItems.map((item,idx) => (
+                                        <tr key={idx}>
+                                            <td >{item.userId}</td>
+                                            <td >{new Date(item.registrationDt).toLocaleDateString()}</td>
+                                            <td >{new Date(item.lastActivityDt).toLocaleDateString()}</td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    <div className="paginationDiv">
+                        {renderPageNumbers}  
+                    </div>        
+                </div>
+                    )
+                }
             </div>
         );
     }

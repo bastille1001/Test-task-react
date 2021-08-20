@@ -7,7 +7,7 @@ import { Calculate } from './components/Calculate';
 class TestTaskApp extends React.Component{
     
     state={
-        isLoaded: false,
+        isLoaded: true,
         items:[],
     }
     
@@ -16,7 +16,7 @@ class TestTaskApp extends React.Component{
         const res = await fetch(`${process.env.REACT_APP_TASK_API}api/user`);
         const json = await res.json();
         this.setState({
-            isLoaded: true,
+            isLoaded: false,
             items: json
         });
     }
@@ -25,17 +25,14 @@ class TestTaskApp extends React.Component{
     render(){
         return (
             <div>
-                <LoadUser 
-                    items={this.state.items}
+                <LoadUser items={this.state.items} isLoaded={this.state.isLoaded}/>
+                <br />
+
+                <AddUser items={this.state.items}
                 />
                 <br />
-                <AddUser 
-                    items={this.state.items}
-                />
-                <br />
-                <Calculate
-                    items={this.state.items}
-                />
+
+                <Calculate items={this.state.items}/>
             </div>
         );
     }
