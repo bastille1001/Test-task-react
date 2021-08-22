@@ -42,33 +42,36 @@ export class AddUser extends React.Component{
         };
 
         fetch(`https://testappapi.somee.com/TestAppApi/api/user`, requestOptions)
-            .then(res => res.json())
             .then(res => {
-                if(res.ok){
-                    this.setState({
-                        newLastActivityDt: "",
-                        newRegistrationDt: "",
-                        error: null,
-                        success: "User successfully added!",
-                    })
-                    setTimeout(() => {
-                        this.setState({
-                            success: "",
-                        });
-                    }, 2000)
-    
-                    this.props.fetchAllList();
+                if(!res.ok){
+                    throw Error("All fields required!");
                 }
-                else{
+                res.json()
+            })
+            .then(res => {
+                
+                this.setState({
+                    newLastActivityDt: "",
+                    newRegistrationDt: "",
+                    error: null,
+                    success: "User successfully added!",
+                })
+                setTimeout(() => {
                     this.setState({
-                        error: "All fields required!"
+                        success: "",
                     });
-                    setTimeout(() => {
-                        this.setState({
-                            error: "",
-                        });
-                    }, 2000)
-                }
+                }, 2000)
+
+                this.props.fetchAllList();
+            }).catch(e => {
+                this.setState({
+                    error: e.message
+                });
+                setTimeout(() => {
+                    this.setState({
+                        error: "",
+                    });
+                }, 2000)
             })
     }
 
