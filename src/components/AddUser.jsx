@@ -24,9 +24,6 @@ export class AddUser extends React.Component{
         else this.setState({ newLastActivityDt: value });
     }
 
-    componentDidMount() {
-        console.log("", process.env);
-    }
 
     addUser = async () => {
         let { newRegistrationDt, newLastActivityDt } = this.state;

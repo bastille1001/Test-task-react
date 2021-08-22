@@ -27,7 +27,7 @@ class TestTaskApp extends React.Component {
     render() {
         return (
             <div>
-                <LoadUser items={this.state.items} isLoaded={this.state.isLoaded} />
+                <LoadUser items={this.state.items} isLoaded={this.state.isLoaded} fetchAllList={this.fetchAllList}/>
                 <br />
 
                 <AddUser items={this.state.items} fetchAllList={this.fetchAllList}

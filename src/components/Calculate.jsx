@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import './styles/calculate.css';
 
 
@@ -63,7 +63,7 @@ export class Calculate extends React.Component{
         const {items} = this.props;
         if (this.state.isClicked) {
             return (
-                    <Line
+                    <Bar
                         data={{
                             labels: items?.map(x => "user id - " + x.userId),
                             datasets:[{
@@ -90,7 +90,7 @@ export class Calculate extends React.Component{
                             ],
                             }
                         }}>
-                    </Line>
+                    </Bar>
             )
         }
     }

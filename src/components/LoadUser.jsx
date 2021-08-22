@@ -11,9 +11,46 @@ export class LoadUser extends React.Component {
             currentPage: 1,
             itemsPerPage: 5,
             activePage: 1,
-            isLoaded: this.props
+            isLoaded: this.props,
+            error: ''
         }
         this.handleClick = this.handleClick.bind(this);
+    }
+
+
+
+    deleteUser = (id) => {
+        fetch(`https://testappapi.somee.com/TestAppApi/api/user?id=${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => {
+                if (!res.ok){
+                    throw Error("Error while deleting user")
+                }
+                res.json();
+            })
+            .then(res => {
+                this.setState({
+                    error: null,
+                    success: "User successfully deleted!",
+                })
+                setTimeout(() => {
+                    this.setState({
+                        success: "",
+                    });
+                }, 2000)
+                console.log('delete user=>', id);
+                this.props.fetchAllList();
+            }).catch(e => {
+                this.setState({
+                    error: e.message
+                });
+                setTimeout(() => {
+                    this.setState({
+                        error: "",
+                    });
+                }, 2000)
+            })
     }
 
     handleClick(event) {
@@ -72,6 +109,7 @@ export class LoadUser extends React.Component {
                                             <td >{item.userId}</td>
                                             <td >{new Date(item.registrationDt).toLocaleDateString()}</td>
                                             <td >{new Date(item.lastActivityDt).toLocaleDateString()}</td>
+                                            <td><button className="button" onClick={()=>this.deleteUser(item.userId)}>delete</button></td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -82,6 +120,8 @@ export class LoadUser extends React.Component {
                         </div>
                     )
                 }
+                <div className="errorDiv">{this.state.error}</div>
+                <div className="successDiv">{this.state.success}</div>
             </div>
         );
     }
