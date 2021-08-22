@@ -12,7 +12,7 @@ class TestTaskApp extends React.Component {
     }
 
     fetchAllList = () => {
-         fetch(`${process.env.REACT_APP_TASK_API}api/user`).then(res => res.json()).then(res => this.setState({
+         fetch(`https://testappapi.somee.com/TestAppApi/api/user`).then(res => res.json()).then(res => this.setState({
             isLoaded: false,
             items: res
         }));

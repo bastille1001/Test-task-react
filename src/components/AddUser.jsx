@@ -41,7 +41,7 @@ export class AddUser extends React.Component{
             )
         };
 
-        fetch(`${process.env.REACT_APP_TASK_API}api/user`, requestOptions)
+        fetch(`https://testappapi.somee.com/TestAppApi/api/user`, requestOptions)
             .then(res => res.json())
             .then(res => {
                 if(res.ok){

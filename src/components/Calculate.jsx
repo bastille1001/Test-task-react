@@ -52,7 +52,7 @@ export class Calculate extends React.Component{
     }
 
     calculate = async () => {
-            const res = await fetch(`${process.env.REACT_APP_TASK_API}api/user/calculate?xDay=${this.state.xDay}`);
+            const res = await fetch(`https://testappapi.somee.com/TestAppApi/api/user/calculate?xDay=${this.state.xDay}`);
             const json = await res.json();
             this.setState({
                 rollingRetention: json
