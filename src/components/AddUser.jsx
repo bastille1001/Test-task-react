@@ -25,7 +25,7 @@ export class AddUser extends React.Component{
     }
 
     componentDidMount() {
-        console.log("process.env.PUBLIC_URL", process.env);
+        console.log("", process.env);
     }
 
     addUser = async () => {
@@ -44,31 +44,31 @@ export class AddUser extends React.Component{
         fetch(`${process.env.REACT_APP_TASK_API}api/user`, requestOptions)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
-                this.setState({
-                    newLastActivityDt: "",
-                    newRegistrationDt: "",
-                    error: null,
-                    success: "User successfully added!",
-                })
-
-                setTimeout(() => {
+                if(res.ok){
                     this.setState({
-                        success: "",
-                    });
-                }, 2000)
-
-                this.props.fetchAllList();
-            })
-            .catch(e => {
-                this.setState({
-                    error: "All fields required!"
-                });
-                setTimeout(() => {
+                        newLastActivityDt: "",
+                        newRegistrationDt: "",
+                        error: null,
+                        success: "User successfully added!",
+                    })
+                    setTimeout(() => {
+                        this.setState({
+                            success: "",
+                        });
+                    }, 2000)
+    
+                    this.props.fetchAllList();
+                }
+                else{
                     this.setState({
-                        error: "",
+                        error: "All fields required!"
                     });
-                }, 2000)
+                    setTimeout(() => {
+                        this.setState({
+                            error: "",
+                        });
+                    }, 2000)
+                }
             })
     }
 
